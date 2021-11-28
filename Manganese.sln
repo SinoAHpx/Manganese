@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manganese", "Manganese\Manganese.csproj", "{23296B07-2965-4166-B9DB-7FF97359C5D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manganese.Test", "Manganese.Test\Manganese.Test.csproj", "{267BC5D1-336D-43AF-9484-12343A0E3BD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manganese.UnitTest", "Manganese.UnitTest\Manganese.UnitTest.csproj", "{BDEE6EEA-4A58-4093-8CC4-14A1497FDFE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23296B07-2965-4166-B9DB-7FF97359C5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23296B07-2965-4166-B9DB-7FF97359C5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23296B07-2965-4166-B9DB-7FF97359C5D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23296B07-2965-4166-B9DB-7FF97359C5D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267BC5D1-336D-43AF-9484-12343A0E3BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267BC5D1-336D-43AF-9484-12343A0E3BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267BC5D1-336D-43AF-9484-12343A0E3BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267BC5D1-336D-43AF-9484-12343A0E3BD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDEE6EEA-4A58-4093-8CC4-14A1497FDFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDEE6EEA-4A58-4093-8CC4-14A1497FDFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDEE6EEA-4A58-4093-8CC4-14A1497FDFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDEE6EEA-4A58-4093-8CC4-14A1497FDFE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
