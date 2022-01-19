@@ -52,7 +52,82 @@ public static class StringDetector
     {
         return long.TryParse(str, out _);
     }
+
+    /// <summary>
+    /// Check if a string is valid double.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static bool IsDouble(this string str)
+    {
+        return double.TryParse(str, out _);
+    }
     
+    /// <summary>
+    /// Check if a string is valid float.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static bool IsFloat(this string str)
+    {
+        return float.TryParse(str, out _);
+    }
+    
+    /// <summary>
+    /// Check if a string is valid decimal.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static bool IsDecimal(this string str)
+    {
+        return decimal.TryParse(str, out _);
+    }
+    
+    /// <summary>
+    /// Throw if a string is not valid double.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static double ThrowIfNotDouble(this string str, string? message = null)
+    {
+        if (!str.IsDouble())
+            throw new ArgumentException(message ?? $"{nameof(str)} is not a valid double");
+
+        return double.Parse(str);
+    }
+    
+    /// <summary>
+    /// Throw if a string is not valid float.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static float ThrowIfNotFloat(this string str, string? message = null)
+    {
+        if (!str.IsFloat())
+            throw new ArgumentException(message ?? $"{nameof(str)} is not a valid float");
+
+        return float.Parse(str);
+    }
+    
+    /// <summary>
+    /// Throw if a string is not valid decimal.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static decimal ThrowIfNotDecimal(this string str, string? message = null)
+    {
+        if (!str.IsDecimal())
+            throw new ArgumentException(message ?? $"{nameof(str)} is not a valid decimal");
+
+        return decimal.Parse(str);
+    }
+
     /// <summary>
     /// Throw if a string is not valid int.
     /// </summary>
@@ -205,53 +280,54 @@ public static class StringDetector
         return str;
     }
     
-    /// <summary>
-    /// Check if a string is valid url.
-    /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static bool IsValidUrl(this string str)
-    {
-        return Regex.IsMatch(str, @"^(http|https|ftp|ws|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$");
-    }
-    
-    /// <summary>
-    /// Throw if a string is not valid url.
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="message"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    public static string ThrowIfNotValidUrl(this string str, string? message = null)
-    {
-        if (!str.IsValidUrl())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be a valid url");
-
-        return str;
-    }
-    
-    /// <summary>
-    /// Check if a string is valid ip address.
-    /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static bool IsValidIpAddress(this string str)
-    {
-        return Regex.IsMatch(str, @"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
-    }
-    
-    /// <summary>
-    /// Throw if a string is not valid ip address.
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="message"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    public static string ThrowIfNotValidIpAddress(this string str, string? message = null)
-    {
-        if (!str.IsValidIpAddress())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be a valid ip address");
-
-        return str;
-    }
+    // /// <summary>
+    // /// Check if a string is valid url.
+    // /// </summary>
+    // /// <param name="str"></param>
+    // /// <returns></returns>
+    // public static bool IsValidUrl(this string str)
+    // {
+    //     return Regex.IsMatch(str,
+    //         @"/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/");
+    // }
+    //
+    // /// <summary>
+    // /// Throw if a string is not valid url.
+    // /// </summary>
+    // /// <param name="str"></param>
+    // /// <param name="message"></param>
+    // /// <returns></returns>
+    // /// <exception cref="ArgumentException"></exception>
+    // public static string ThrowIfNotValidUrl(this string str, string? message = null)
+    // {
+    //     if (!str.IsValidUrl())
+    //         throw new ArgumentException(message ?? $"{nameof(str)} must be a valid url");
+    //
+    //     return str;
+    // }
+    //
+    // /// <summary>
+    // /// Check if a string is valid ip address.
+    // /// </summary>
+    // /// <param name="str"></param>
+    // /// <returns></returns>
+    // public static bool IsValidIpAddress(this string str)
+    // {
+    //     return Regex.IsMatch(str, @"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
+    // }
+    //
+    // /// <summary>
+    // /// Throw if a string is not valid ip address.
+    // /// </summary>
+    // /// <param name="str"></param>
+    // /// <param name="message"></param>
+    // /// <returns></returns>
+    // /// <exception cref="ArgumentException"></exception>
+    // public static string ThrowIfNotValidIpAddress(this string str, string? message = null)
+    // {
+    //     if (!str.IsValidIpAddress())
+    //         throw new ArgumentException(message ?? $"{nameof(str)} must be a valid ip address");
+    //
+    //     return str;
+    // }
 }
