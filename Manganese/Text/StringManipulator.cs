@@ -1,0 +1,150 @@
+﻿using Manganese.Array;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace Manganese.Text;
+
+/// <summary>
+/// Convert a string to particular types
+/// </summary>
+public static class StringManipulator
+{
+    /// <summary>
+    /// Deserialize a string to a JSON object
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="nullValueHandling"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="JsonSerializationException"></exception>
+    public static T? Deserialize<T>(this string value, NullValueHandling nullValueHandling = NullValueHandling.Include)
+    {
+        if (!value.IsValidJson())
+            throw new JsonSerializationException("Invalid JSON");
+
+        return JsonConvert.DeserializeObject<T>(value, new JsonSerializerSettings()
+        {
+            NullValueHandling = nullValueHandling
+        });
+    }
+    
+    /// <summary>
+    /// Deserialize a string to a JSON object
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="settings"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="JsonSerializationException"></exception>
+    public static T? Deserialize<T>(this string value, JsonSerializerSettings settings)
+    {
+        if (!value.IsValidJson())
+            throw new JsonSerializationException("Invalid JSON");
+
+        return JsonConvert.DeserializeObject<T>(value, settings);
+    }
+
+    /// <summary>
+    /// Convert a string to JObject. Exception will be occurred if it not. 
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static JObject ToJObject(this string s)
+    {
+        return s.ThrowIfNullOrEmpty("A null or empty string can't be convert to json!")
+            .ThrowIfNotJObject("Not a valid json string!");
+    }
+
+    /// <summary>
+    /// Convert a string to JArray. Exception will be occurred if it not. 
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static JArray ToJArray(this string s)
+    {
+        return s.ThrowIfNullOrEmpty("A null or empty string can't be convert to json!")
+            .ThrowIfNotJArray("Not a valid json string!");
+    }
+
+    /// <summary>
+    /// Serialize a object to JSON string
+    /// </summary>
+    /// <param name="t"></param>
+    /// <param name="indented"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static string Serialize<T>(this T t, bool indented = true)
+    {
+        return JsonConvert.SerializeObject(t, new JsonSerializerSettings()
+        {
+            Formatting = indented ? Formatting.Indented : Formatting.None,
+        });
+    }
+
+    /// <summary>
+    /// Serialize a object to JSON string
+    /// </summary>
+    /// <param name="t"></param>
+    /// <param name="settings"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static string Serialize<T>(this T t, JsonSerializerSettings settings)
+    {
+        return JsonConvert.SerializeObject(t, settings);
+    }
+    
+    /// <summary>
+    /// Convert string to int
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static int ToInt32(this string s)
+    {
+        return int.Parse(s);
+    }
+
+    /// <summary>
+    /// Convert string to long
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static long ToInt64(this string s)
+    {
+        return long.Parse(s);
+    }
+
+    /// <summary>
+    /// Remove all the invalid characters in a particular string
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static string RemoveInvalidPathChars(this string s)
+    {
+        return Path.GetInvalidPathChars()
+            .Aggregate(s, (current, c) => current.Replace(c.ToString(), string.Empty));
+    }
+    
+    /// <summary>
+    /// Remove all the invalid characters in a particular string
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static string RemoveInvalidFileNameChars(this string s)
+    {
+        return Path.GetInvalidFileNameChars()
+            .Aggregate(s, (current, c) => current.Replace(c.ToString(), string.Empty));
+    }
+    
+    /// <summary>
+    /// Path.Combine
+    /// </summary>
+    /// <param name="s"></param>
+    /// <param name="s2"></param>
+    /// <returns></returns>
+    public static string CombinePath(this string s, params string[] s2)
+    {
+        var list = new List<string> { s };
+
+        return list.Concat(s2).Aggregate(Path.Combine);
+    }
+}
