@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Manganese.Array;
 using Manganese.Text;
+using Newtonsoft.Json;
 
 namespace Manganese.Test
 {
@@ -8,15 +9,25 @@ namespace Manganese.Test
     {
         public static void Main()
         {
-            var o = new object[]
+            var o = new
             {
-                new { a1 = "a1" },
-                new { a2 = "a21" },
-                new { a3 = "a13" },
-                new { a4 = "a14", a5 = true },
-            }.Output();
+                a1 = "Awd",
+                a = new
+                {
+                    b = new
+                    {
+                        c = 1
+                    }
+                }
+            };
 
-            Console.WriteLine(o.JoinToString(" ", o1 => o1.Serialize()));
+            var s = o.Serialize();
+            Console.WriteLine(s);
+
+            var o2 = s.Deserialize<O2>();
+            Console.WriteLine(s.Fetch("a.b.c"));
+            Console.WriteLine(o2.C);
+            Console.WriteLine(o2.A);
 
             // var s = new List<int>()
             // {
@@ -25,5 +36,15 @@ namespace Manganese.Test
             //
             // Console.WriteLine(s);
         }
+    }
+
+    [JsonConverter(typeof(JsonPathConverter))]
+    class O2
+    {
+        [JsonProperty("a1")]
+        public string A {get; set;}
+        
+        [JsonProperty("a.b.c")]
+        public string C { get; set; }
     }
 }

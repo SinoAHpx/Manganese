@@ -9,6 +9,58 @@ namespace Manganese.Text;
 /// </summary>
 public static class StringManipulator
 {
+    #region Json
+
+    /// <summary>
+    /// Fetches value from a json with particular path
+    /// </summary>
+    /// <param name="json"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static JToken? FetchJToken(this string json, string path)
+    {
+        if (json.IsJArray())
+            throw new ArgumentException("JArray could not be get");
+
+        var obj = json.ThrowIfNotJObject("Is not a valid JObject");
+
+        return obj.SelectToken(path);
+    }
+
+    /// <summary>
+    /// Fetches value from a json with particular path
+    /// </summary>
+    /// <param name="json"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public static string? Fetch(this string json, string path)
+    {
+        return json.FetchJToken(path)?.ToString();
+    }
+    
+    /// <summary>
+    /// Fetches value from a json with particular path
+    /// </summary>
+    /// <param name="json"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public static JToken? FetchJToken(this JToken json, string path)
+    {
+        return json.ToString().FetchJToken(path);
+    }
+
+    /// <summary>
+    /// Fetches value from a json with particular path
+    /// </summary>
+    /// <param name="json"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public static string? Fetch(this JToken json, string path)
+    {
+        return json.ToString().Fetch(path);
+    }
+
     /// <summary>
     /// Deserialize a string to a JSON object
     /// </summary>
@@ -92,7 +144,9 @@ public static class StringManipulator
     {
         return JsonConvert.SerializeObject(t, settings);
     }
-    
+
+    #endregion
+
     /// <summary>
     /// Convert string to int
     /// </summary>
