@@ -5,6 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Manganese</Title>
+        <Description>A handy extensions library</Description>
+        <Copyright>Copyright 2022 AHpx all rights reserved.</Copyright>
+        <PackageProjectUrl>https://github.com/SinoAHpx/Manganese</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/SinoAHpx/Manganese</RepositoryUrl>
+        <PackageTags>Extension, extension methods, handy</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
