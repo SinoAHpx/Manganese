@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Manganese.Text;
 using Xunit;
 
@@ -62,5 +63,19 @@ public class StringDetectorShould
         Assert.True("114514@gmail.com".IsValidEmail());
         Assert.False("114514@gmail".IsValidEmail());
         Assert.False("114514@com.gmail".IsValidEmail());
+    }
+
+    [Fact]
+    public void ContainsAnyOf()
+    {
+        var t = new List<string>()
+        {
+            "a1", "a2", "a3"
+        };
+        
+        Assert.True("a1".ContainsAnyOf(t));
+        Assert.True("a2".ContainsAnyOf(t));
+        Assert.True("a3".ContainsAnyOf(t));
+        Assert.False("a4".ContainsAnyOf(t));
     }
 }

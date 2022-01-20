@@ -276,55 +276,15 @@ public static class StringDetector
 
         return str;
     }
-    
-    // /// <summary>
-    // /// Check if a string is valid url.
-    // /// </summary>
-    // /// <param name="str"></param>
-    // /// <returns></returns>
-    // public static bool IsValidUrl(this string str)
-    // {
-    //     return Regex.IsMatch(str,
-    //         @"/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/");
-    // }
-    //
-    // /// <summary>
-    // /// Throw if a string is not valid url.
-    // /// </summary>
-    // /// <param name="str"></param>
-    // /// <param name="message"></param>
-    // /// <returns></returns>
-    // /// <exception cref="ArgumentException"></exception>
-    // public static string ThrowIfNotValidUrl(this string str, string? message = null)
-    // {
-    //     if (!str.IsValidUrl())
-    //         throw new ArgumentException(message ?? $"{nameof(str)} must be a valid url");
-    //
-    //     return str;
-    // }
-    //
-    // /// <summary>
-    // /// Check if a string is valid ip address.
-    // /// </summary>
-    // /// <param name="str"></param>
-    // /// <returns></returns>
-    // public static bool IsValidIpAddress(this string str)
-    // {
-    //     return Regex.IsMatch(str, @"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
-    // }
-    //
-    // /// <summary>
-    // /// Throw if a string is not valid ip address.
-    // /// </summary>
-    // /// <param name="str"></param>
-    // /// <param name="message"></param>
-    // /// <returns></returns>
-    // /// <exception cref="ArgumentException"></exception>
-    // public static string ThrowIfNotValidIpAddress(this string str, string? message = null)
-    // {
-    //     if (!str.IsValidIpAddress())
-    //         throw new ArgumentException(message ?? $"{nameof(str)} must be a valid ip address");
-    //
-    //     return str;
-    // }
+
+    /// <summary>
+    /// "string".Contains() but extend to every single element in sequence
+    /// </summary>
+    /// <param name="s"></param>
+    /// <param name="t"></param>
+    /// <returns></returns>
+    public static bool ContainsAnyOf(this string s, IEnumerable<string> t)
+    {
+        return t.Any(s.Contains);
+    }
 }

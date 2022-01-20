@@ -8,7 +8,17 @@ namespace Manganese.Test
     {
         public static void Main()
         {
-            Console.WriteLine(@"C:".CombinePath(new[] { "test", @"awdawd\awd\a.exe" }));
+            var o = new[] { "a1", "a2", "a3", "a44", "a55" }.Output();
+
+            while (true)
+            {
+                Console.Write("Input: ");
+                var input = Console.ReadLine();
+                if (input.IsIn(o))
+                {
+                    Console.WriteLine("Contains!");
+                }
+            }
 
             // var s = new List<int>()
             // {
