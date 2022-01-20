@@ -52,5 +52,18 @@ public static class ArrayManipulator
         
         return output;
     }
-    
+
+    /// <summary>
+    /// Return a random element
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    public static TSource Random<TSource>(this IEnumerable<TSource> origin)
+    {
+        var re = origin.ToList();
+        var random = new Random();
+        
+        return re[random.Next(re.Count)];
+    }
 }

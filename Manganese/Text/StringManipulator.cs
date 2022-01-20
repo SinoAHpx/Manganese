@@ -147,4 +147,29 @@ public static class StringManipulator
 
         return list.Concat(s2).Aggregate(Path.Combine);
     }
+
+    /// <summary>
+    /// string.Join but is an extension method
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="separator"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static string JoinToString<T>(this IEnumerable<T> origin, string separator)
+    {
+        return string.Join(separator, origin.Select(x => x!.ToString()));
+    }
+
+    /// <summary>
+    /// string.Join but is an extension method
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="separator"></param>
+    /// <param name="selector">specified IEnumerable.Select() selector</param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static string JoinToString<T>(this IEnumerable<T> origin, string separator, Func<T, string> selector)
+    {
+        return string.Join(separator, origin.Select(selector));
+    }
 }

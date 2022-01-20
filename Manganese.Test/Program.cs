@@ -8,17 +8,15 @@ namespace Manganese.Test
     {
         public static void Main()
         {
-            var o = new[] { "a1", "a2", "a3", "a44", "a55" }.Output();
-
-            while (true)
+            var o = new object[]
             {
-                Console.Write("Input: ");
-                var input = Console.ReadLine();
-                if (input.IsIn(o))
-                {
-                    Console.WriteLine("Contains!");
-                }
-            }
+                new { a1 = "a1" },
+                new { a2 = "a21" },
+                new { a3 = "a13" },
+                new { a4 = "a14", a5 = true },
+            }.Output();
+
+            Console.WriteLine(o.JoinToString(" ", o1 => o1.Serialize()));
 
             // var s = new List<int>()
             // {
