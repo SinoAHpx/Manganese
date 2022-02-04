@@ -21,10 +21,10 @@ namespace Manganese.Test
                 }
             };
 
-            var s = o.Serialize();
+            var s = o.ToJsonString();
             Console.WriteLine(s);
 
-            var o2 = s.Deserialize<O2>();
+            var o2 = s.DeserializeTo<O2>();
             Console.WriteLine(s.Fetch("a.b.c"));
             Console.WriteLine(o2.C);
             Console.WriteLine(o2.A);

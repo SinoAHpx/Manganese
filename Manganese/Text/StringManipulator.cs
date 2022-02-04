@@ -69,7 +69,7 @@ public static class StringManipulator
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     /// <exception cref="JsonSerializationException"></exception>
-    public static T? Deserialize<T>(this string value, NullValueHandling nullValueHandling = NullValueHandling.Include)
+    public static T? DeserializeTo<T>(this string value, NullValueHandling nullValueHandling = NullValueHandling.Include)
     {
         if (!value.IsValidJson())
             throw new JsonSerializationException("Invalid JSON");
@@ -88,7 +88,7 @@ public static class StringManipulator
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     /// <exception cref="JsonSerializationException"></exception>
-    public static T? Deserialize<T>(this string value, JsonSerializerSettings settings)
+    public static T? DeserializeTo<T>(this string value, JsonSerializerSettings settings)
     {
         if (!value.IsValidJson())
             throw new JsonSerializationException("Invalid JSON");
@@ -125,7 +125,7 @@ public static class StringManipulator
     /// <param name="indented"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static string Serialize<T>(this T t, bool indented = true)
+    public static string ToJsonString<T>(this T t, bool indented = true)
     {
         return JsonConvert.SerializeObject(t, new JsonSerializerSettings()
         {
@@ -140,7 +140,7 @@ public static class StringManipulator
     /// <param name="settings"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static string Serialize<T>(this T t, JsonSerializerSettings settings)
+    public static string ToJsonString<T>(this T t, JsonSerializerSettings settings)
     {
         return JsonConvert.SerializeObject(t, settings);
     }
