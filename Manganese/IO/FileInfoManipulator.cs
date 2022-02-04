@@ -14,6 +14,8 @@ public static class FileInfoManipulator
         File.WriteAllText(file.FullName, text, Encoding.UTF8);
     }
 
+#if NET6
+
     /// <summary>
     /// File.WriteAllTextAsync with UTF-8 encoding.
     /// </summary>
@@ -23,6 +25,29 @@ public static class FileInfoManipulator
     {
         await File.WriteAllTextAsync(file.FullName, text, Encoding.UTF8);
     }
+    
+        /// <summary>
+    /// File.WriteAllBytesAsync
+    /// </summary>
+    /// <param name="file"></param>
+    /// <param name="bytes"></param>
+    public static async Task WriteAllBytesAsync(this FileInfo file, byte[] bytes)
+    {
+        await File.WriteAllBytesAsync(file.FullName, bytes);
+    }
+    
+    
+    /// <summary>
+    /// File.WriteAllLinesAsync with UTF-8 encoding.
+    /// </summary>
+    /// <param name="file"></param>
+    /// <param name="lines"></param>
+    public static async Task WriteAllLineAsync(this FileInfo file, IEnumerable<string> lines)
+    {
+        await File.WriteAllLinesAsync(file.FullName, lines);
+    }
+#endif
+
 
     /// <summary>
     /// File.WriteAllBytes
@@ -34,15 +59,7 @@ public static class FileInfoManipulator
         File.WriteAllBytes(file.FullName, bytes);
     }
 
-    /// <summary>
-    /// File.WriteAllBytesAsync
-    /// </summary>
-    /// <param name="file"></param>
-    /// <param name="bytes"></param>
-    public static async Task WriteAllBytesAsync(this FileInfo file, byte[] bytes)
-    {
-        await File.WriteAllBytesAsync(file.FullName, bytes);
-    }
+
 
     /// <summary>
     /// File.WriteAllLines with UTF-8 encoding.
@@ -52,15 +69,5 @@ public static class FileInfoManipulator
     public static void WriteAllLine(this FileInfo file, IEnumerable<string> lines)
     {
         File.WriteAllLines(file.FullName, lines, Encoding.UTF8);
-    }
-
-    /// <summary>
-    /// File.WriteAllLinesAsync with UTF-8 encoding.
-    /// </summary>
-    /// <param name="file"></param>
-    /// <param name="lines"></param>
-    public static async Task WriteAllLineAsync(this FileInfo file, IEnumerable<string> lines)
-    {
-        await File.WriteAllLinesAsync(file.FullName, lines);
     }
 }
