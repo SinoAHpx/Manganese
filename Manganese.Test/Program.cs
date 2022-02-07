@@ -9,42 +9,17 @@ namespace Manganese.Test
     {
         public static void Main()
         {
-            var o = new
+            var a = new List<string>
             {
-                a1 = "Awd",
-                a = new
-                {
-                    b = new
-                    {
-                        c = 1
-                    }
-                }
+                "awd",
+                "awd1",
+                "awd2",
+                "awd3"
             };
 
-            var s = o.ToJsonString();
-            Console.WriteLine(s);
-
-            var o2 = s.DeserializeTo<O2>();
-            Console.WriteLine(s.Fetch("a.b.c"));
-            Console.WriteLine(o2.C);
-            Console.WriteLine(o2.A);
-
-            // var s = new List<int>()
-            // {
-            //     1, 2, 3, 4, 5, 6, 7
-            // }.Remove(new[] { 8 });
-            //
-            // Console.WriteLine(s);
+            Console.WriteLine(a.Any("awd"));
+            Console.WriteLine(a.Any("awd1"));
+            Console.WriteLine(a.Any("awd4"));
         }
-    }
-
-    [JsonConverter(typeof(JsonPathConverter))]
-    class O2
-    {
-        [JsonProperty("a1")]
-        public string A {get; set;}
-        
-        [JsonProperty("a.b.c")]
-        public string C { get; set; }
     }
 }

@@ -13,4 +13,16 @@ public static class ArrayDetector
     {
         return array.Contains(t);
     }
+
+    /// <summary>
+    /// Check if a sequence has any of target value in
+    /// </summary>
+    /// <param name="sequence"></param>
+    /// <param name="target"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static bool Any<T>(this IEnumerable<T> sequence, T target)
+    {
+        return sequence.Any(x => EqualityComparer<T>.Default.Equals(x, target));
+    }
 }

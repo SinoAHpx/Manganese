@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Manganese.Array;
 using Newtonsoft.Json.Linq;
 
 namespace Manganese.Text;
@@ -11,184 +12,184 @@ public static class StringDetector
     /// <summary>
     /// Check if a string is empty or whitespace.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="considerWhitespace">Whether if consider whitespaces as empty, default is false</param>
     /// <returns></returns>
-    public static bool IsNullOrEmpty(this string str, bool considerWhitespace = false)
+    public static bool IsNullOrEmpty(this string origin, bool considerWhitespace = false)
     {
-        return considerWhitespace ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str);
+        return considerWhitespace ? string.IsNullOrWhiteSpace(origin) : string.IsNullOrEmpty(origin);
     }
 
     /// <summary>
     /// Check if a string is null or whitespace.
     /// </summary>
-    public static string ThrowIfNullOrEmpty(this string str, string? message = null, bool considerWhitespace = false)
+    public static string ThrowIfNullOrEmpty(this string origin, string? message = null, bool considerWhitespace = false)
     {
-        if (str.IsNullOrEmpty(considerWhitespace))
-            throw new ArgumentNullException(message ?? $"{nameof(str)} cannot be null or empty");
+        if (origin.IsNullOrEmpty(considerWhitespace))
+            throw new ArgumentNullException(message ?? $"{nameof(origin)} cannot be null or empty");
 
-        return str;
+        return origin;
     }
     
     /// <summary>
     /// Check if a string is valid int.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsInt32(this string str)
+    public static bool IsInt32(this string origin)
     {
-        return int.TryParse(str, out _);
+        return int.TryParse(origin, out _);
     }
     
     /// <summary>
     /// Check if a string is valid long.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsInt64(this string str)
+    public static bool IsInt64(this string origin)
     {
-        return long.TryParse(str, out _);
+        return long.TryParse(origin, out _);
     }
 
     /// <summary>
     /// Check if a string is valid double.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsDouble(this string str)
+    public static bool IsDouble(this string origin)
     {
-        return double.TryParse(str, out _);
+        return double.TryParse(origin, out _);
     }
     
     /// <summary>
     /// Check if a string is valid float.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsFloat(this string str)
+    public static bool IsFloat(this string origin)
     {
-        return float.TryParse(str, out _);
+        return float.TryParse(origin, out _);
     }
     
     /// <summary>
     /// Check if a string is valid decimal.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsDecimal(this string str)
+    public static bool IsDecimal(this string origin)
     {
-        return decimal.TryParse(str, out _);
+        return decimal.TryParse(origin, out _);
     }
     
     /// <summary>
     /// Throw if a string is not valid double.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static double ThrowIfNotDouble(this string str, string? message = null)
+    public static double ThrowIfNotDouble(this string origin, string? message = null)
     {
-        if (!str.IsDouble())
-            throw new ArgumentException(message ?? $"{nameof(str)} is not a valid double");
+        if (!origin.IsDouble())
+            throw new ArgumentException(message ?? $"{nameof(origin)} is not a valid double");
 
-        return double.Parse(str);
+        return double.Parse(origin);
     }
     
     /// <summary>
     /// Throw if a string is not valid float.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static float ThrowIfNotFloat(this string str, string? message = null)
+    public static float ThrowIfNotFloat(this string origin, string? message = null)
     {
-        if (!str.IsFloat())
-            throw new ArgumentException(message ?? $"{nameof(str)} is not a valid float");
+        if (!origin.IsFloat())
+            throw new ArgumentException(message ?? $"{nameof(origin)} is not a valid float");
 
-        return float.Parse(str);
+        return float.Parse(origin);
     }
     
     /// <summary>
     /// Throw if a string is not valid decimal.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static decimal ThrowIfNotDecimal(this string str, string? message = null)
+    public static decimal ThrowIfNotDecimal(this string origin, string? message = null)
     {
-        if (!str.IsDecimal())
-            throw new ArgumentException(message ?? $"{nameof(str)} is not a valid decimal");
+        if (!origin.IsDecimal())
+            throw new ArgumentException(message ?? $"{nameof(origin)} is not a valid decimal");
 
-        return decimal.Parse(str);
+        return decimal.Parse(origin);
     }
 
     /// <summary>
     /// Throw if a string is not valid int.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static int ThrowIfNotInt32(this string str, string? message = null)
+    public static int ThrowIfNotInt32(this string origin, string? message = null)
     {
-        if (!str.IsInt32())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be an integer");
+        if (!origin.IsInt32())
+            throw new ArgumentException(message ?? $"{nameof(origin)} must be an integer");
 
-        return int.Parse(str);
+        return int.Parse(origin);
     }
     
     /// <summary>
     /// Throw if a string is not valid long.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static long ThrowIfNotInt64(this string str, string? message = null)
+    public static long ThrowIfNotInt64(this string origin, string? message = null)
     {
-        if (!str.IsInt64())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be an integer");
+        if (!origin.IsInt64())
+            throw new ArgumentException(message ?? $"{nameof(origin)} must be an integer");
 
-        return long.Parse(str);
+        return long.Parse(origin);
     }
     
     /// <summary>
     /// Check if a string is valid json.
     /// </summary>
-    public static bool IsValidJson(this string str)
+    public static bool IsValidJson(this string origin)
     {
-        return str.IsJObject() || str.IsJArray();
+        return origin.IsJObject() || origin.IsJArray();
     }
     
     /// <summary>
     /// Throw if a string is not valid json document.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string ThrowIfNotValidJson(this string str, string? message = null)
+    public static string ThrowIfNotValidJson(this string origin, string? message = null)
     {
-        if (!str.IsValidJson())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be a valid json");
+        if (!origin.IsValidJson())
+            throw new ArgumentException(message ?? $"{nameof(origin)} must be a valid json");
 
-        return str;
+        return origin;
     }
     
     /// <summary>
     /// Check if a string is valid json object.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsJObject(this string str)
+    public static bool IsJObject(this string origin)
     {
-        if (str.StartsWith("{") && str.EndsWith("}"))
+        if (origin.StartsWith("{") && origin.EndsWith("}"))
             try
             {
-                JObject.Parse(str);
+                JObject.Parse(origin);
 
                 return true;
             }
@@ -203,14 +204,14 @@ public static class StringDetector
     /// <summary>
     /// Check if a string is valid json array.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsJArray(this string str)
+    public static bool IsJArray(this string origin)
     {
-        if (str.StartsWith("[") && str.EndsWith("]"))
+        if (origin.StartsWith("[") && origin.EndsWith("]"))
             try
             {
-                JArray.Parse(str);
+                JArray.Parse(origin);
 
                 return true;
             }
@@ -225,66 +226,77 @@ public static class StringDetector
     /// <summary>
     /// Throw if a string is not valid json object.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static JObject ThrowIfNotJObject(this string str, string? message = null)
+    public static JObject ThrowIfNotJObject(this string origin, string? message = null)
     {
-        if (!str.IsJObject())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be a valid json object");
+        if (!origin.IsJObject())
+            throw new ArgumentException(message ?? $"{nameof(origin)} must be a valid json object");
 
-        return JObject.Parse(str);
+        return JObject.Parse(origin);
     }
     
     /// <summary>
     /// Throw if a string is not valid json array.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static JArray ThrowIfNotJArray(this string str, string? message = null)
+    public static JArray ThrowIfNotJArray(this string origin, string? message = null)
     {
-        if (!str.IsJArray())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be a valid json array");
+        if (!origin.IsJArray())
+            throw new ArgumentException(message ?? $"{nameof(origin)} must be a valid json array");
 
-        return JArray.Parse(str);
+        return JArray.Parse(origin);
     }
     
     /// <summary>
     /// Check if a string is valid email address.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <returns></returns>
-    public static bool IsValidEmail(this string str)
+    public static bool IsValidEmail(this string origin)
     {
-        return Regex.IsMatch(str, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        return Regex.IsMatch(origin, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
     }
     
     /// <summary>
     /// Throw if a string is not valid email address.
     /// </summary>
-    /// <param name="str"></param>
+    /// <param name="origin"></param>
     /// <param name="message"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string ThrowIfNotValidEmail(this string str, string? message = null)
+    public static string ThrowIfNotValidEmail(this string origin, string? message = null)
     {
-        if (!str.IsValidEmail())
-            throw new ArgumentException(message ?? $"{nameof(str)} must be a valid email address");
+        if (!origin.IsValidEmail())
+            throw new ArgumentException(message ?? $"{nameof(origin)} must be a valid email address");
 
-        return str;
+        return origin;
     }
 
     /// <summary>
     /// "string".Contains() but extend to every single element in sequence
     /// </summary>
-    /// <param name="s"></param>
+    /// <param name="origin"></param>
     /// <param name="t"></param>
     /// <returns></returns>
-    public static bool ContainsAnyOf(this string s, IEnumerable<string> t)
+    public static bool ContainsAnyOf(this string origin, IEnumerable<string> t)
     {
-        return t.Any(s.Contains);
+        return t.Any(origin);
+    }
+
+    /// <summary>
+    /// Check if a string is an integer
+    /// </summary>
+    /// <returns></returns>
+    public static bool IsInteger(this string origin)
+    {
+        return origin.TrimStart('-').ToCharArray()
+            .Select(x => x.ToString())
+            .All(c => int.TryParse(c, out _));
     }
 }

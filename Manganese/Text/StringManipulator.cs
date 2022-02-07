@@ -226,4 +226,15 @@ public static class StringManipulator
     {
         return string.Join(separator, origin.Select(selector));
     }
+
+    /// <summary>
+    /// Empty specified string in a string
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="toEmpty"></param>
+    /// <returns></returns>
+    public static string Empty(this string origin, string toEmpty)
+    {
+        return origin.Replace(toEmpty, string.Empty);
+    }
 }

@@ -70,4 +70,15 @@ public static class FileInfoManipulator
     {
         File.WriteAllLines(file.FullName, lines, Encoding.UTF8);
     }
+
+    /// <summary>
+    /// An encapsulation of Path.GetFileName
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="withExtensionName"></param>
+    /// <returns></returns>
+    public static string GetFileName(this string path, bool withExtensionName = true)
+    {
+        return withExtensionName ? Path.GetFileName(path) : Path.GetFileNameWithoutExtension(path);
+    }
 }
