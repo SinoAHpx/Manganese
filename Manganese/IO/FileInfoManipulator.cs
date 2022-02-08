@@ -2,6 +2,9 @@
 
 namespace Manganese.IO;
 
+/// <summary>
+/// Handle FileInfo in a more convenient way
+/// </summary>
 public static class FileInfoManipulator
 {
     /// <summary>

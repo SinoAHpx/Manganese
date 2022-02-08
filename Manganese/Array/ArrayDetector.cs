@@ -1,5 +1,8 @@
 ﻿namespace Manganese.Array;
 
+/// <summary>
+/// Methods for checking specified sequence
+/// </summary>
 public static class ArrayDetector
 {
     /// <summary>

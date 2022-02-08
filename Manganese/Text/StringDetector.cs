@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 namespace Manganese.Text;
 
 /// <summary>
-/// Detectors for string.
+/// Check if a string is valid
 /// </summary>
 public static class StringDetector
 {
@@ -159,6 +159,8 @@ public static class StringDetector
     /// <summary>
     /// Check if a string is valid json.
     /// </summary>
+    /// <param name="origin"></param>
+    /// <returns></returns>
     public static bool IsValidJson(this string origin)
     {
         return origin.IsJObject() || origin.IsJArray();
@@ -292,6 +294,7 @@ public static class StringDetector
     /// <summary>
     /// Check if a string is an integer
     /// </summary>
+    /// <param name="origin"></param>
     /// <returns></returns>
     public static bool IsInteger(this string origin)
     {

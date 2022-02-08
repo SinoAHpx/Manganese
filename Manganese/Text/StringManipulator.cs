@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 namespace Manganese.Text;
 
 /// <summary>
-/// Convert a string to particular types
+/// Handle a string in a more convenient way
 /// </summary>
 public static class StringManipulator
 {
@@ -236,5 +236,47 @@ public static class StringManipulator
     public static string Empty(this string origin, string toEmpty)
     {
         return origin.Replace(toEmpty, string.Empty);
+    }
+
+    /// <summary>
+    /// Substring between two string in this specified string
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
+    /// <param name="last">Start right string from last index of it</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static string SubstringBetween(this string origin, string left, string right, bool last = false)
+    {
+        if (!origin.Contains(left) || !origin.Contains(right))
+            throw new ArgumentException($"Argument does not exist in original string");
+
+        var iLeft = origin.IndexOf(left, StringComparison.Ordinal)  + left.Length;
+        var iRight = last
+            ? origin.LastIndexOf(right, StringComparison.Ordinal)
+            : origin.IndexOf(right, StringComparison.Ordinal);
+
+        return origin.Substring(iLeft, iRight - iLeft);
+    }
+
+    /// <summary>
+    /// Substring after a string in specified string
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="left"></param>
+    /// <param name="last">Start from last eligible string</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public static string SubstringAfter(this string origin, string left, bool last = false)
+    {
+        if (!origin.Contains(left))
+            throw new ArgumentException($"Argument does not exist in original string");
+
+        var iLeft = last
+            ? origin.LastIndexOf(left, StringComparison.Ordinal) + left.Length
+            : origin.IndexOf(left, StringComparison.Ordinal) + left.Length;
+
+        return origin.Substring(iLeft);
     }
 }

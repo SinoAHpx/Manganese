@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Manganese.Text;
 using Xunit;
 
@@ -77,5 +78,18 @@ public class StringDetectorShould
         Assert.True("a2".ContainsAnyOf(t));
         Assert.True("a3".ContainsAnyOf(t));
         Assert.False("a4".ContainsAnyOf(t));
+    }
+
+    [Fact]
+    public void SubstringBetween()
+    {
+        Assert.True("Key: test - 123".SubstringBetween(": ", " -") == "test");
+    }
+
+    [Fact]
+    public void SubstringAfter()
+    {
+        Assert.True("This: 123 - 123".SubstringAfter(": ") == "123 - 123");
+        Assert.True("This.Is.A.Test".SubstringAfter(".", true) == "Test");
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace Manganese.Array;
 
+/// <summary>
+/// Handle specified sequence in a more convenient way
+/// </summary>
 public static class ArrayManipulator
 {
     /// <summary>
@@ -50,6 +53,22 @@ public static class ArrayManipulator
         
         Console.WriteLine($"[{output.Select(x => x!.ToString()).Aggregate((c, n) => $"{c}, {n}")}]");
         
+        return output;
+    }
+
+    /// <summary>
+    /// Output to console
+    /// </summary>
+    /// <param name="sources"></param>
+    /// <param name="manipulator"></param>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    public static IEnumerable<TSource> Output<TSource>(this IEnumerable<TSource> sources, Func<TSource, string> manipulator)
+    {
+        var output = sources.ToList();
+
+        Console.WriteLine($"[{output.Select(manipulator).Aggregate((c, n) => $"{c}, {n}")}]");
+
         return output;
     }
 
