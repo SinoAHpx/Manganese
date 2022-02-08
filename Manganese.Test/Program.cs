@@ -99,8 +99,8 @@ namespace Manganese.Test
         public static XElement? Map(this Type type)
         {
             var re = MemberElements
-                .Where(e => e.Attribute("name")!.Value.StartsWith("T"))
-                .First(e => e
+                .Where(e => e?.Attribute("name")!.Value.StartsWith("T") is true)
+                .First(e => e?
                     .Attribute("name")!.Value.SubstringAfter(":")
                     .Split(".").Last() == type.Name);
 
@@ -110,18 +110,18 @@ namespace Manganese.Test
         public static XElement? Map(this MethodInfo method)
         {
             var candidates = MemberElements
-                .Where(e => e.Attribute("name")!.Value.StartsWith("M"))
-                .Where(e => e.Attribute("name")!.Value.Contains(method.Name));
+                .Where(e => e?.Attribute("name")?.Value.StartsWith("M") is true)
+                .Where(e => e?.Attribute("name")?.Value.Contains(method.Name) is true);
 
             var paramInfos = method.GetParameters();
                 
             foreach (var candidate in candidates)
             {
-                var paramNames = candidate.Elements("param")
+                var paramNames = candidate?.Elements("param")
                     .Select(z => z.Attribute("name")?.Value);
                 
                 if (paramInfos.Select(x => x.Name)
-                    .All(x => paramNames.Contains(x)))
+                    .All(x => paramNames?.Contains(x) is true))
                 {
                     return candidate;
                 }
