@@ -279,4 +279,46 @@ public static class StringManipulator
 
         return origin.Substring(iLeft);
     }
+
+    /// <summary>
+    /// Insert a string after specified string
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="left"></param>
+    /// <param name="toInsert"></param>
+    /// <param name="each">Insert after each matched string</param>
+    /// <param name="last">Start from last matched string</param>
+    /// <returns></returns>
+    public static string InsertAfter(this string origin, string left, string toInsert, bool each = true, bool last = false)
+    {
+        if (each)
+            return origin.Split(new[] { left }, StringSplitOptions.None).JoinToString($"{left}{toInsert}");
+
+        var iLeft = last
+            ? origin.LastIndexOf(left, StringComparison.Ordinal)
+            : origin.IndexOf(left, StringComparison.Ordinal);
+
+        return origin.Insert(iLeft + 1, toInsert);
+    }
+
+    /// <summary>
+    /// Insert a string before specified string
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="right"></param>
+    /// <param name="toInsert"></param>
+    /// <param name="each">Insert before each matched string</param>
+    /// <param name="last">Start from last matched string</param>
+    /// <returns></returns>
+    public static string InsertBefore(this string origin, string right, string toInsert, bool each = true, bool last = false)
+    {
+        if (each)
+            return origin.Split(new[] { right }, StringSplitOptions.None).JoinToString($"{toInsert}{right}");
+        
+        var iRight = last
+            ? origin.LastIndexOf(right, StringComparison.Ordinal)
+            : origin.IndexOf(right, StringComparison.Ordinal);
+
+        return origin.Insert(iRight, toInsert);
+    }
 }

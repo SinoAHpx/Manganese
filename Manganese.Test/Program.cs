@@ -42,7 +42,7 @@ namespace Manganese.Test
 
                     var methodElement = method.Map();
                     
-                    var methodHeader = new StringBuilder($"+ `{method.Name}({method.ReturnType.Name})`: ");
+                    var methodHeader = new StringBuilder($"+ ```{method.Name}({method.ReturnType.Name})```: ");
                     methodHeader.Append(methodElement?.Element("summary")?.Value.Trim());
                     mdLines.Add(methodHeader.ToString());
                     
@@ -51,7 +51,7 @@ namespace Manganese.Test
                     {
                         var parameterElement = parameter.Map(method);
                         var parameterHeader =
-                            new StringBuilder($"\t+ `{parameter.Name}({parameter.ParameterType.Name})`");
+                            new StringBuilder($"\t+ ```{parameter.Name}({parameter.ParameterType.Name})```");
 
                         if (!parameterElement.Value.IsNullOrEmpty())
                             parameterHeader.Append($": {parameterElement.Value.Trim()}");
@@ -61,7 +61,7 @@ namespace Manganese.Test
                 }
             }
 
-            File.WriteAllLines(@"C:\Users\ahpx\Desktop\test.xml", mdLines);
+            File.WriteAllLines(@"C:\Users\ahpx\Desktop\test.md", mdLines);
         }
     }
 
