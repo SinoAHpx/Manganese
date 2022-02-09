@@ -16,77 +16,52 @@ namespace Manganese.Test
             
             foreach (var type in Utils.Types)
             {
-                type.Map()?.Attribute("name")?.Value.CW();
+                //type header
+                var typeHeader = new StringBuilder($"### [{type.Name}]");
+                typeHeader.Append($"(https://github.com/SinoAHpx/Manganese/tree/master/");
+                typeHeader.Append($"{type.Namespace?.Split(".").JoinToString("/")}/{type.Name}.cs)");
+
+                mdLines.Add(typeHeader.ToString());
+                
+                //type summary
+                var typeElement = type.Map();
+                var typeSummaryElement = typeElement?.Element("summary");
+                var typeSummary = typeSummaryElement!.Value.Trim()
+                    .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
+                    .Where(x => !x.IsNullOrEmpty())
+                    .Select(x => x.Trim())
+                    .JoinToString(Environment.NewLine);
+                
+                mdLines.Add(typeSummary);
+                
                 var methods = type.GetMethods().Where(x => x.IsStatic && x.IsPublic);
                 
                 foreach (var method in methods)
                 {
-                    method.Map()?.Attribute("name")?.Value.CW();
+                    //method header
+
+                    var methodElement = method.Map();
+                    
+                    var methodHeader = new StringBuilder($"+ `{method.Name}({method.ReturnType.Name})`: ");
+                    methodHeader.Append(methodElement?.Element("summary")?.Value.Trim());
+                    mdLines.Add(methodHeader.ToString());
+                    
+                    //parameters
+                    foreach (var parameter in method.GetParameters())
+                    {
+                        var parameterElement = parameter.Map(method);
+                        var parameterHeader =
+                            new StringBuilder($"\t+ `{parameter.Name}({parameter.ParameterType.Name})`");
+
+                        if (!parameterElement.Value.IsNullOrEmpty())
+                            parameterHeader.Append($": {parameterElement.Value.Trim()}");
+
+                        mdLines.Add(parameterHeader.ToString());
+                    }
                 }
             }
-            
-            /*
-            // return;
-            //
-            // foreach (var docMember in xDocument.Descendants("member"))
-            // {
-            //     var name = docMember.Attribute("name")!.Value;
-            //
-            //     if (name.StartsWith("T"))
-            //     {
-            //         name = name.Empty("T:");
-            //
-            //         var markdownLine = new StringBuilder($"### [{name.SubstringAfter(".", true)}]");
-            //         markdownLine.Append($"(https://github.com/SinoAHpx/Manganese/tree/master/");
-            //         markdownLine.Append($"{name.Split(".").JoinToString("/")}.cs)");
-            //         mdLines.Add(markdownLine.ToString());
-            //
-            //         var element = docMember.Element("summary");
-            //
-            //         mdLines.Add(docMember.Element("summary")!.Value
-            //             .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
-            //             .Where(x => !x.IsNullOrEmpty())
-            //             .Select(x => x.Trim())
-            //             .JoinToString(Environment.NewLine));
-            //     }
-            //     else
-            //     {
-            //         var path = name.Contains("``")
-            //             ? name.SubstringBetween(":", "``").Split(".")
-            //             : name.SubstringBetween(":", "(").Split(".");
-            //         var methodName = path.Last();
-            //         var typeName = path[^2];
-            //
-            //         var methodInfo = Utils.GetMethodByName(methodName, Utils.GetTypeByName(typeName));
-            //
-            //         var listHead = new StringBuilder($"+ `{methodName}({methodInfo.ReturnType.Name})`: ");
-            //         listHead.Append(docMember.Element("summary")!.Value);
-            //
-            //         mdLines.Add(listHead.ToString());
-            //
-            //         var param = docMember.Elements("param");
-            //         if (!param.Any())
-            //             continue;
-            //         
-            //         foreach (var paramElement in docMember.Elements("param"))
-            //         {
-            //             var paramName = paramElement.Attribute("name")!.Value;
-            //             var listItem = new StringBuilder($"\r+ `{paramName}");
-            //             listItem.Append($"({Utils.GetParamByName(paramName, methodInfo).ParameterType.Name})");
-            //             listItem.Append('`');
-            //             if (!paramElement.Value.IsNullOrEmpty())
-            //                 listItem.Append($": {paramElement.Value}");
-            //
-            //             mdLines.Add(listItem.ToString());
-            //         }
-            //     }
-            // }
-            //
-            // foreach (var s in mdLines)
-            // {
-            //     Console.WriteLine(s);
-            // }
-            */
+
+            File.WriteAllLines(@"C:\Users\ahpx\Desktop\test.xml", mdLines);
         }
     }
 
@@ -127,36 +102,20 @@ namespace Manganese.Test
                 }
             }
 
-            new ArgumentException($"Unexpected method: {method.Name} in {method.GetParameters().JoinToString(",")}")
-                .Message.CW();
-
-            return null;
+            throw new ArgumentException($"Unexpected method: {method.Name} in {method.GetParameters().JoinToString(",")}");
         }
-        
-        
+
+        public static XElement? Map(this ParameterInfo parameter, MethodInfo methodInfo)
+        {
+            var methodElement = methodInfo.Map();
+            
+            return methodElement?
+                .Elements("param")
+                .First(e => e.Attribute("name")?.Value == parameter.Name);
+        }
         
         public static readonly IEnumerable<Type> Types = typeof(ArrayDetector).Assembly.GetTypes().Where(x => x.IsPublic && x.IsAbstract);
 
-        public static Type GetTypeByName(string name)
-        {
-            return Types.First(x => x.Name == name);
-        }
-
-        public static MethodInfo GetMethodByName(string name, Type type)
-        {
-            return type.GetMethods().First(x => x.Name == name);
-        }
-
-        public static ParameterInfo GetParamByName(string name, MethodInfo methodInfo)
-        {
-            if (methodInfo.Name == "Output")
-            {
-                var a = methodInfo.GetParameters();
-                Console.WriteLine(a);
-            }
-            return methodInfo.GetParameters().First(x => x.Name == name);
-        }
-        
         public static object CW(this object origin, string prefix = "")
         {
             Console.WriteLine($"{prefix}{origin}");

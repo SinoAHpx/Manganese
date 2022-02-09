@@ -23,6 +23,11 @@ public static class StringDetector
     /// <summary>
     /// Check if a string is null or whitespace.
     /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="message"></param>
+    /// <param name="considerWhitespace"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static string ThrowIfNullOrEmpty(this string origin, string? message = null, bool considerWhitespace = false)
     {
         if (origin.IsNullOrEmpty(considerWhitespace))
