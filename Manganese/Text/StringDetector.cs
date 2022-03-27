@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Manganese.Array;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Manganese.Text;
@@ -168,7 +169,15 @@ public static class StringDetector
     /// <returns></returns>
     public static bool IsValidJson(this string origin)
     {
-        return origin.IsJObject() || origin.IsJArray();
+        try
+        {
+            JsonConvert.DeserializeObject<object>(origin);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
     
     /// <summary>
@@ -193,19 +202,16 @@ public static class StringDetector
     /// <returns></returns>
     public static bool IsJObject(this string origin)
     {
-        if (origin.StartsWith("{") && origin.EndsWith("}"))
-            try
-            {
-                JObject.Parse(origin);
+        try
+        {
+            JObject.Parse(origin);
 
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-
-        return false;
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
     
     /// <summary>
@@ -215,19 +221,16 @@ public static class StringDetector
     /// <returns></returns>
     public static bool IsJArray(this string origin)
     {
-        if (origin.StartsWith("[") && origin.EndsWith("]"))
-            try
-            {
-                JArray.Parse(origin);
+        try
+        {
+            JArray.Parse(origin);
 
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-
-        return false;
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
     
     /// <summary>

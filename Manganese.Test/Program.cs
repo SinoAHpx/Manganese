@@ -10,58 +10,12 @@ namespace Manganese.Test
 {
     class Program
     {
-        public static void Main()
+        public static async Task Main()
         {
-            var mdLines = new List<string>();
-            
-            foreach (var type in Utils.Types)
-            {
-                //type header
-                var typeHeader = new StringBuilder($"### [{type.Name}]");
-                typeHeader.Append($"(https://github.com/SinoAHpx/Manganese/tree/master/");
-                typeHeader.Append($"{type.Namespace?.Split(".").JoinToString("/")}/{type.Name}.cs)");
+            var client = new HttpClient();
+            var str = await client.GetStringAsync("http://httpbin.org/get");
 
-                mdLines.Add(typeHeader.ToString());
-                
-                //type summary
-                var typeElement = type.Map();
-                var typeSummaryElement = typeElement?.Element("summary");
-                var typeSummary = typeSummaryElement!.Value.Trim()
-                    .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
-                    .Where(x => !x.IsNullOrEmpty())
-                    .Select(x => x.Trim())
-                    .JoinToString(Environment.NewLine);
-                
-                mdLines.Add(typeSummary);
-                
-                var methods = type.GetMethods().Where(x => x.IsStatic && x.IsPublic);
-                
-                foreach (var method in methods)
-                {
-                    //method header
-
-                    var methodElement = method.Map();
-                    
-                    var methodHeader = new StringBuilder($"+ ```{method.Name}({method.ReturnType.Name})```: ");
-                    methodHeader.Append(methodElement?.Element("summary")?.Value.Trim());
-                    mdLines.Add(methodHeader.ToString());
-                    
-                    //parameters
-                    foreach (var parameter in method.GetParameters())
-                    {
-                        var parameterElement = parameter.Map(method);
-                        var parameterHeader =
-                            new StringBuilder($"\t+ ```{parameter.Name}({parameter.ParameterType.Name})```");
-
-                        if (!parameterElement.Value.IsNullOrEmpty())
-                            parameterHeader.Append($": {parameterElement.Value.Trim()}");
-
-                        mdLines.Add(parameterHeader.ToString());
-                    }
-                }
-            }
-
-            File.WriteAllLines(@"C:\Users\ahpx\Desktop\test.md", mdLines);
+            Console.WriteLine(str.IsValidJson());
         }
     }
 
