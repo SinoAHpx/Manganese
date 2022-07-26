@@ -3,8 +3,8 @@ name: .NET
 on:
   push:
     branches: [ "master" ]
-    paths-ignore:
-    - '.github/**'
+    # paths-ignore:
+    # - '.github/**'
   pull_request:
     branches: [ "master" ]
 
@@ -40,4 +40,4 @@ jobs:
         dotnet build -c release
         dotnet pack -c release -p:PackageVersion=$name
         cd bin/release
-        dotnet nuget push Manganese.$name.nupkg --api-key ${{ secrets.NUGET_KEY }} -s "nuget"
+        dotnet nuget push Manganese.$name.nupkg --api-key ${{ secrets.NUGET_KEY }} --source "github"
