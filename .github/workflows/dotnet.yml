@@ -31,7 +31,7 @@ jobs:
           currtime=$(date +%s)
           echo "commit hash is $commithash"
           echo "time is $currtime"
-          name=1.2-$currtime-$commithash
+          name=1.2.0-$currtime-$commithash
           echo "name is $name"
 
           # Manganese
