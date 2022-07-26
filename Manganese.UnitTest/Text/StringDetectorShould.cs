@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Manganese.Text;
 using Xunit;
 
@@ -16,17 +15,17 @@ public class StringDetectorShould
     [InlineData("   ")]
     public void IsNullOrEmpty(string input)
     {
-        Assert.True(input.IsNullOrEmpty(true));
         Assert.False("a".IsNullOrEmpty());
+        Assert.True(input.IsNullOrEmpty());
     }
 
     [Fact]
     public void ThrowExceptionWhenNullOrEmpty()
     {
-        Assert.Throws<ArgumentNullException>(() => "".ThrowIfNullOrEmpty());
-        Assert.Throws<ArgumentNullException>(() => " ".ThrowIfNullOrEmpty(considerWhitespace: true));
-        Assert.Throws<ArgumentNullException>(() => "  ".ThrowIfNullOrEmpty(considerWhitespace: true));
-        Assert.Throws<ArgumentNullException>(() => "   ".ThrowIfNullOrEmpty(considerWhitespace: true));
+        Assert.Throws<ArgumentNullException>(() => "".ThrowIfNullOrEmpty<ArgumentNullException>());
+        Assert.Throws<ArgumentNullException>(() => " ".ThrowIfNullOrEmpty<ArgumentNullException>());
+        Assert.Throws<ArgumentNullException>(() => "  ".ThrowIfNullOrEmpty<ArgumentNullException>());
+        Assert.Throws<ArgumentNullException>(() => "   ".ThrowIfNullOrEmpty<ArgumentNullException>());
     }
 
 

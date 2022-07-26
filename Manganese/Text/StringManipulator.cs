@@ -23,7 +23,7 @@ public static class StringManipulator
         if (json.IsJArray())
             throw new ArgumentException("JArray could not be get");
 
-        var obj = json.ThrowIfNotJObject("Is not a valid JObject");
+        var obj = json.ThrowIfNotJObject<ArgumentException>("Is not a valid JObject");
 
         return obj.SelectToken(path);
     }
@@ -103,8 +103,8 @@ public static class StringManipulator
     /// <returns></returns>
     public static JObject ToJObject(this string s)
     {
-        return s.ThrowIfNullOrEmpty("A null or empty string can't be convert to json!")
-            .ThrowIfNotJObject("Not a valid json string!");
+        return s.ThrowIfNullOrEmpty<ArgumentException>("A null or empty string can't be convert to json!")
+            .ThrowIfNotJObject<ArgumentException>("Not a valid json string!");
     }
 
     /// <summary>
@@ -114,8 +114,8 @@ public static class StringManipulator
     /// <returns></returns>
     public static JArray ToJArray(this string s)
     {
-        return s.ThrowIfNullOrEmpty("A null or empty string can't be convert to json!")
-            .ThrowIfNotJArray("Not a valid json string!");
+        return s.ThrowIfNullOrEmpty<ArgumentNullException>("A null or empty string can't be convert to json!")
+            .ThrowIfNotJArray<ArgumentNullException>("Not a valid json string!");
     }
 
     /// <summary>
