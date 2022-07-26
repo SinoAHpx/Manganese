@@ -20,6 +20,36 @@ public static class FileInfoManipulator
 #if NET6
 
     /// <summary>
+    /// File.ReadAllTextAsync
+    /// </summary>
+    /// <param name="fileInfo"></param>
+    /// <returns></returns>
+    public static async Task<string> ReadAllTextAsync(this  FileInfo fileInfo)
+    {
+        return await File.ReadAllTextAsync(fileInfo.FullName);
+    }
+    
+    /// <summary>
+    /// File.ReadAllLinesAsync
+    /// </summary>
+    /// <param name="fileInfo"></param>
+    /// <returns></returns>
+    public static async Task<string[]> ReadAllLinesAsync(this FileInfo fileInfo)
+    {
+        return await File.ReadAllLinesAsync(fileInfo.FullName);
+    }
+    
+    /// <summary>
+    /// File.ReadAllBytesAsync
+    /// </summary>
+    /// <param name="fileInfo"></param>
+    /// <returns></returns>
+    public static async Task<byte[]> ReadAllBytesAsync(this FileInfo fileInfo)
+    {
+        return await File.ReadAllBytesAsync(fileInfo.FullName);
+    } 
+
+    /// <summary>
     /// File.WriteAllTextAsync with UTF-8 encoding.
     /// </summary>
     /// <param name="file"></param>
@@ -61,8 +91,7 @@ public static class FileInfoManipulator
     {
         File.WriteAllBytes(file.FullName, bytes);
     }
-
-
+    
 
     /// <summary>
     /// File.WriteAllLines with UTF-8 encoding.
@@ -72,6 +101,37 @@ public static class FileInfoManipulator
     public static void WriteAllLine(this FileInfo file, IEnumerable<string> lines)
     {
         File.WriteAllLines(file.FullName, lines, Encoding.UTF8);
+    }
+
+    /// <summary>
+    /// File.ReadAllText
+    /// </summary>
+    /// <param name="fileInfo"></param>
+    /// <returns></returns>
+    public static string ReadAllText(this FileInfo fileInfo)
+    {
+        return File.ReadAllText(fileInfo.FullName);
+    }
+
+    /// <summary>
+    /// File.ReadAllLines
+    /// </summary>
+    /// <param name="fileInfo"></param>
+    /// <returns></returns>
+    public static string[] ReadAllLines(this FileInfo fileInfo)
+    {
+        return File.ReadAllLines(fileInfo.FullName);
+    }
+
+
+    /// <summary>
+    /// File.ReadAllBytes
+    /// </summary>
+    /// <param name="fileInfo"></param>
+    /// <returns></returns>
+    public static byte[] ReadAllBytes(this FileInfo fileInfo)
+    {
+        return File.ReadAllBytes(fileInfo.FullName);
     }
 
     /// <summary>
