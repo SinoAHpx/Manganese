@@ -31,14 +31,18 @@ jobs:
           currtime=$(date +%s)
           echo "commit hash is $commithash"
           echo "time is $currtime"
-          name=1.2.0-$commithash
-          echo "name is $name"
-          # TODO: make version proper
+
           # Manganese
           cd Manganese
-          dotnet restore
-          dotnet build -c release
-          dotnet pack -c release -p:PackageVersion=$name
+          dotnet pack -c release
           cd bin/release
-          # dotnet nuget add source --username SinoAHpx --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/SinoAHpx/index.json"
-          dotnet nuget push Manganese.$name.nupkg --api-key ${{ secrets.NUGET_KEY  }} --source "nuget"
+          dotnet nuget add source --name nuget "https://api.nuget.org/v3/index.json"
+          # Getting file extension name is .nupkg
+          file=""
+          cdir=`ls ./*.nupkg`
+          for eachfile in $cdir
+          do
+            file=$eachfile
+          done
+
+          dotnet nuget push $file --api-key ${{ secrets.NUGET_KEY  }} --source "nuget"
