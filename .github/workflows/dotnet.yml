@@ -38,7 +38,7 @@ jobs:
           dotnet build
           dotnet pack
           cd bin/Debug
-          dotnet nuget add source --name nuget "https://api.nuget.org/v3/index.json"
+          # dotnet nuget add source --name nuget "https://api.nuget.org/v3/index.json"
           # Getting file extension name is .nupkg
           file=""
           cdir=`ls ./*.nupkg`
