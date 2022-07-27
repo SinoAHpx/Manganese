@@ -34,6 +34,8 @@ jobs:
 
           # Manganese
           cd Manganese
+          dotnet restore
+          dotnet build
           dotnet pack -c release
           cd bin/release
           dotnet nuget add source --name nuget "https://api.nuget.org/v3/index.json"
