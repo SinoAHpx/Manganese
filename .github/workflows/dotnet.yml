@@ -37,7 +37,7 @@ jobs:
           dotnet restore
           dotnet build
           dotnet pack
-          cd bin/release
+          cd bin/Debug
           dotnet nuget add source --name nuget "https://api.nuget.org/v3/index.json"
           # Getting file extension name is .nupkg
           file=""
