@@ -17,8 +17,6 @@ public static class FileInfoManipulator
         File.WriteAllText(file.FullName, text, Encoding.UTF8);
     }
 
-#if NET6
-
     /// <summary>
     /// File.ReadAllTextAsync
     /// </summary>
@@ -79,8 +77,6 @@ public static class FileInfoManipulator
     {
         await File.WriteAllLinesAsync(file.FullName, lines);
     }
-#endif
-
 
     /// <summary>
     /// File.WriteAllBytes

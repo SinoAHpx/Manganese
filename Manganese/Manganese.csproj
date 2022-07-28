@@ -12,8 +12,8 @@
         <RepositoryUrl>https://github.com/SinoAHpx/Manganese</RepositoryUrl>
         <PackageTags>Extension, extension methods, handy</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageVersion>1.2.4</PackageVersion>
-        <TargetFrameworks>net6.0;netstandard2.1</TargetFrameworks>
+        <PackageVersion>1.2.5</PackageVersion>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
