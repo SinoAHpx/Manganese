@@ -14,7 +14,7 @@ public static class FileInfoManipulator
     /// <param name="text"></param>
     public static void WriteAllText(this FileInfo file, string text)
     {
-        File.WriteAllText(file.FullName, text, Encoding.UTF8);
+        File.WriteAllText(file.FullName, text, new UTF8Encoding(false));
     }
 
     /// <summary>
@@ -24,7 +24,7 @@ public static class FileInfoManipulator
     /// <returns></returns>
     public static async Task<string> ReadAllTextAsync(this  FileInfo fileInfo)
     {
-        return await File.ReadAllTextAsync(fileInfo.FullName);
+        return await File.ReadAllTextAsync(fileInfo.FullName, new UTF8Encoding(false));
     }
     
     /// <summary>
@@ -34,7 +34,7 @@ public static class FileInfoManipulator
     /// <returns></returns>
     public static async Task<string[]> ReadAllLinesAsync(this FileInfo fileInfo)
     {
-        return await File.ReadAllLinesAsync(fileInfo.FullName);
+        return await File.ReadAllLinesAsync(fileInfo.FullName, new UTF8Encoding(false));
     }
     
     /// <summary>
@@ -54,7 +54,7 @@ public static class FileInfoManipulator
     /// <param name="text"></param>
     public static async Task WriteAllTextAsync(this FileInfo file, string text)
     {
-        await File.WriteAllTextAsync(file.FullName, text, Encoding.UTF8);
+        await File.WriteAllTextAsync(file.FullName, text, new UTF8Encoding(false));
     }
     
         /// <summary>
@@ -75,7 +75,7 @@ public static class FileInfoManipulator
     /// <param name="lines"></param>
     public static async Task WriteAllLineAsync(this FileInfo file, IEnumerable<string> lines)
     {
-        await File.WriteAllLinesAsync(file.FullName, lines);
+        await File.WriteAllLinesAsync(file.FullName, lines, new UTF8Encoding(false));
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ public static class FileInfoManipulator
     /// <param name="lines"></param>
     public static void WriteAllLine(this FileInfo file, IEnumerable<string> lines)
     {
-        File.WriteAllLines(file.FullName, lines, Encoding.UTF8);
+        File.WriteAllLines(file.FullName, lines, new UTF8Encoding(false));
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public static class FileInfoManipulator
     /// <returns></returns>
     public static string ReadAllText(this FileInfo fileInfo)
     {
-        return File.ReadAllText(fileInfo.FullName);
+        return File.ReadAllText(fileInfo.FullName, new UTF8Encoding(false));
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ public static class FileInfoManipulator
     /// <returns></returns>
     public static string[] ReadAllLines(this FileInfo fileInfo)
     {
-        return File.ReadAllLines(fileInfo.FullName);
+        return File.ReadAllLines(fileInfo.FullName, new UTF8Encoding(false));
     }
 
 
