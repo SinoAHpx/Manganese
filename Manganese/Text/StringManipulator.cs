@@ -123,13 +123,15 @@ public static class StringManipulator
     /// </summary>
     /// <param name="t"></param>
     /// <param name="indented"></param>
+    /// <param name="keepNullValue"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static string ToJsonString<T>(this T t, bool indented = true)
+    public static string ToJsonString<T>(this T t, bool indented = true, bool keepNullValue = true)
     {
         return JsonConvert.SerializeObject(t, new JsonSerializerSettings()
         {
             Formatting = indented ? Formatting.Indented : Formatting.None,
+            NullValueHandling = keepNullValue ? NullValueHandling.Include : NullValueHandling.Ignore
         });
     }
 
