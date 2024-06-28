@@ -36,9 +36,8 @@ jobs:
           cd Manganese
           dotnet restore
           dotnet build
-          dotnet pack
+          dotnet pack --configuration Debug
           cd bin/Debug
-          # dotnet nuget add source --name nuget "https://api.nuget.org/v3/index.json"
           # Getting file extension name is .nupkg
           file=""
           cdir=`ls ./*.nupkg`
