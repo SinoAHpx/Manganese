@@ -170,6 +170,16 @@ public static class StringManipulator
     }
 
     /// <summary>
+    /// Convert string to bool
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static bool ToBool(this string s)
+    {
+        return bool.Parse(s);
+    }
+
+    /// <summary>
     /// Remove all the invalid characters in a particular string
     /// </summary>
     /// <param name="s"></param>
