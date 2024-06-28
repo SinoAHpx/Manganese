@@ -7,7 +7,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Manganese</Title>
         <Description>Another handy extensions library</Description>
-        <Copyright>Copyright 2022 AHpx all rights reserved.</Copyright>
+        <Copyright>Copyright 2024 AHpx all rights reserved.</Copyright>
         <PackageProjectUrl>https://github.com/SinoAHpx/Manganese</PackageProjectUrl>
         <RepositoryUrl>https://github.com/SinoAHpx/Manganese</RepositoryUrl>
         <PackageTags>Extension, extension methods, handy</PackageTags>
