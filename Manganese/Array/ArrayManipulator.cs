@@ -85,4 +85,18 @@ public static class ArrayManipulator
         
         return re[random.Next(re.Count)];
     }
+
+    /// <summary>
+    /// Encapsulation of foreach statement
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="origin"></param>
+    /// <param name="action"></param>
+    public static void ForEach<TSource>(this IEnumerable<TSource> origin, Action<TSource> action)
+    {
+        foreach (var source in origin)
+        {
+            action(source);
+        }
+    }
 }
