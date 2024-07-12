@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Manganese.UnitTest.Text;
 
-//Test all methods in the StringDetector class 
+//Test all methods in the StringMolecule class 
 public class StringDetectorShould
 {
     [Theory]

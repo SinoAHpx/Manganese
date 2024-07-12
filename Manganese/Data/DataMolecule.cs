@@ -5,7 +5,7 @@ namespace Manganese.Data;
 /// <summary>
 /// General detector
 /// </summary>
-public static class CommonDataDetector
+public static class DataMolecule
 {
     /// <summary>
     /// Throw an exception if object is null 

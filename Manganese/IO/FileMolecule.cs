@@ -5,129 +5,129 @@ namespace Manganese.IO;
 /// <summary>
 /// Handle FileInfo in a more convenient way
 /// </summary>
-public static class FileInfoManipulator
+public static class FileMolecule
 {
     /// <summary>
-    /// File.WriteAllText with UTF-8 encoding.
+    /// FileMolecule.WriteAllText with UTF-8 encoding.
     /// </summary>
     /// <param name="file"></param>
     /// <param name="text"></param>
     public static void WriteAllText(this FileInfo file, string text)
     {
-        File.WriteAllText(file.FullName, text, new UTF8Encoding(false));
+        System.IO.File.WriteAllText(file.FullName, text, new UTF8Encoding(false));
     }
 
     /// <summary>
-    /// File.ReadAllTextAsync
+    /// FileMolecule.ReadAllTextAsync
     /// </summary>
     /// <param name="fileInfo"></param>
     /// <returns></returns>
     public static async Task<string> ReadAllTextAsync(this  FileInfo fileInfo)
     {
-        return await File.ReadAllTextAsync(fileInfo.FullName, new UTF8Encoding(false));
+        return await System.IO.File.ReadAllTextAsync(fileInfo.FullName, new UTF8Encoding(false));
     }
     
     /// <summary>
-    /// File.ReadAllLinesAsync
+    /// FileMolecule.ReadAllLinesAsync
     /// </summary>
     /// <param name="fileInfo"></param>
     /// <returns></returns>
     public static async Task<string[]> ReadAllLinesAsync(this FileInfo fileInfo)
     {
-        return await File.ReadAllLinesAsync(fileInfo.FullName, new UTF8Encoding(false));
+        return await System.IO.File.ReadAllLinesAsync(fileInfo.FullName, new UTF8Encoding(false));
     }
     
     /// <summary>
-    /// File.ReadAllBytesAsync
+    /// FileMolecule.ReadAllBytesAsync
     /// </summary>
     /// <param name="fileInfo"></param>
     /// <returns></returns>
     public static async Task<byte[]> ReadAllBytesAsync(this FileInfo fileInfo)
     {
-        return await File.ReadAllBytesAsync(fileInfo.FullName);
+        return await System.IO.File.ReadAllBytesAsync(fileInfo.FullName);
     } 
 
     /// <summary>
-    /// File.WriteAllTextAsync with UTF-8 encoding.
+    /// FileMolecule.WriteAllTextAsync with UTF-8 encoding.
     /// </summary>
     /// <param name="file"></param>
     /// <param name="text"></param>
     public static async Task WriteAllTextAsync(this FileInfo file, string text)
     {
-        await File.WriteAllTextAsync(file.FullName, text, new UTF8Encoding(false));
+        await System.IO.File.WriteAllTextAsync(file.FullName, text, new UTF8Encoding(false));
     }
     
         /// <summary>
-    /// File.WriteAllBytesAsync
+    /// FileMolecule.WriteAllBytesAsync
     /// </summary>
     /// <param name="file"></param>
     /// <param name="bytes"></param>
     public static async Task WriteAllBytesAsync(this FileInfo file, byte[] bytes)
     {
-        await File.WriteAllBytesAsync(file.FullName, bytes);
+        await System.IO.File.WriteAllBytesAsync(file.FullName, bytes);
     }
     
     
     /// <summary>
-    /// File.WriteAllLinesAsync with UTF-8 encoding.
+    /// FileMolecule.WriteAllLinesAsync with UTF-8 encoding.
     /// </summary>
     /// <param name="file"></param>
     /// <param name="lines"></param>
     public static async Task WriteAllLineAsync(this FileInfo file, IEnumerable<string> lines)
     {
-        await File.WriteAllLinesAsync(file.FullName, lines, new UTF8Encoding(false));
+        await System.IO.File.WriteAllLinesAsync(file.FullName, lines, new UTF8Encoding(false));
     }
 
     /// <summary>
-    /// File.WriteAllBytes
+    /// FileMolecule.WriteAllBytes
     /// </summary>
     /// <param name="file"></param>
     /// <param name="bytes"></param>
     public static void WriteAllBytes(this FileInfo file, byte[] bytes)
     {
-        File.WriteAllBytes(file.FullName, bytes);
+        System.IO.File.WriteAllBytes(file.FullName, bytes);
     }
     
 
     /// <summary>
-    /// File.WriteAllLines with UTF-8 encoding.
+    /// FileMolecule.WriteAllLines with UTF-8 encoding.
     /// </summary>
     /// <param name="file"></param>
     /// <param name="lines"></param>
     public static void WriteAllLine(this FileInfo file, IEnumerable<string> lines)
     {
-        File.WriteAllLines(file.FullName, lines, new UTF8Encoding(false));
+        System.IO.File.WriteAllLines(file.FullName, lines, new UTF8Encoding(false));
     }
 
     /// <summary>
-    /// File.ReadAllText
+    /// FileMolecule.ReadAllText
     /// </summary>
     /// <param name="fileInfo"></param>
     /// <returns></returns>
     public static string ReadAllText(this FileInfo fileInfo)
     {
-        return File.ReadAllText(fileInfo.FullName, new UTF8Encoding(false));
+        return System.IO.File.ReadAllText(fileInfo.FullName, new UTF8Encoding(false));
     }
 
     /// <summary>
-    /// File.ReadAllLines
+    /// FileMolecule.ReadAllLines
     /// </summary>
     /// <param name="fileInfo"></param>
     /// <returns></returns>
     public static string[] ReadAllLines(this FileInfo fileInfo)
     {
-        return File.ReadAllLines(fileInfo.FullName, new UTF8Encoding(false));
+        return System.IO.File.ReadAllLines(fileInfo.FullName, new UTF8Encoding(false));
     }
 
 
     /// <summary>
-    /// File.ReadAllBytes
+    /// FileMolecule.ReadAllBytes
     /// </summary>
     /// <param name="fileInfo"></param>
     /// <returns></returns>
     public static byte[] ReadAllBytes(this FileInfo fileInfo)
     {
-        return File.ReadAllBytes(fileInfo.FullName);
+        return System.IO.File.ReadAllBytes(fileInfo.FullName);
     }
 
     /// <summary>
